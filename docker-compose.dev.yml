@@ -1,0 +1,20 @@
+services:
+  # 1. Keeps port 8080 but runs fully isolated inside the compiled image filesystem
+  api_gateway:
+    ports:
+      - "8080:8000"
+    environment:
+      - ENVIRONMENT=development
+    volumes:
+      - gateway_persistence:/app/data
+
+  # 2. Drops host folder mounts to prevent caching overlaps
+  task_worker:
+    environment:
+      - ENVIRONMENT=development
+    volumes:
+      - gateway_persistence:/app/data
+
+  # 3. Drops conflicting host ports
+  redis_broker:
+    ports: []

@@ -1,0 +1,30 @@
+# ====================================================================
+# SECURE INTAKE GATEWAY - ABSOLUTE CONTAINER EXCLUSION MATRIX
+# Forces Docker to bypass host environments completely.
+# ====================================================================
+
+# Block Local Environment Folder Traversal Paths
+.venv/
+venv/
+**/venv/
+**/.venv/
+env/
+ENV/
+
+# Block Credentials and Variables Shards
+config/.env
+.env
+*.env
+
+# Block Persistent Shards
+data/*.db
+data/*.db-wal
+data/*.db-shm
+data/vault/*
+
+# Block Processing Cache Footprints
+.pytest_cache/
+.coverage
+htmlcov/
+**/__pycache__/
+**/*.pyc

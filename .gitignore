@@ -1,0 +1,47 @@
+# ====================================================================
+# SECURE INTAKE GATEWAY - PRODUCTION REPOSITORY EXCLUSION (.GITIGNORE)
+# Battle-tested parameters shield local data and private keys.
+# ====================================================================
+
+# 1. Private Local Credentials & Operational Environments
+config/.env
+.env
+*.env
+.env.*
+
+# 2. Local Serverless Relational Database Ledger & WAL Sidecar Files
+data/*.db
+data/*.db-wal
+data/*.db-shm
+data/*.db-journal
+
+# 3. Secure Multi-Tenant Media Storage Vaults
+# Safely ignores arbitrary uploaded assets while preserving folder tracking metadata
+data/vault/*
+!data/vault/.gitkeep
+
+# 4. Volatile Local Python Virtual Environments
+.venv/
+venv/
+ENV/
+env/
+build/
+dist/
+*.egg-info/
+
+# 5. Automated Unit Testing Profiles & Performance Coverage Reports
+.pytest_cache/
+.coverage
+htmlcov/
+.cache/
+
+# 6. Python Runtime Bytecodes & Processing Trace Artifacts
+**/__pycache__/
+**/*.pyc
+**/*.pyo
+**/*.pyd
+
+# 7. OS Meta Metadata & System Dump Log Footprints
+.DS_Store
+Thumbs.db
+*.log

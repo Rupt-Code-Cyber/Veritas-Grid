@@ -1,0 +1,56 @@
+services:
+  # 1. Asynchronous FastAPI perimeter core web server and B2B REST API router
+  api_gateway:
+    image: secure-intake-gateway:latest
+    container_name: ng_api_gateway
+    restart: always
+    command: sh -c "python3 database_setup.py && uvicorn server:app --host 0.0.0.0 --port 8000"
+    ports:
+      - "8000:8000"
+    env_file:
+      - config/.env
+    environment:
+      - ENVIRONMENT=production
+    volumes:
+      - gateway_persistence:/app/data
+    depends_on:
+      redis_broker:
+        condition: service_healthy
+
+  # 2. Distributed Taskiq background queue consumer processing node
+  task_worker:
+    image: secure-intake-gateway:latest
+    container_name: ng_task_worker
+    restart: always
+    command: taskiq worker worker:broker
+    env_file:
+      - config/.env
+    environment:
+      - ENVIRONMENT=production
+    volumes:
+      - gateway_persistence:/app/data
+    depends_on:
+      redis_broker:
+        condition: service_healthy
+
+  # 3. Secure, fast, in-memory data cache and chatbot state memory layer
+  redis_broker:
+    image: redis:7.2-alpine
+    container_name: redis_broker
+    restart: always
+    expose:
+      - "6379"
+    volumes:
+      - redis_cache:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  # Shared physical storage space blocks keeping relational ledger records unified across containers
+  gateway_persistence:
+    driver: local
+  redis_cache:
+    driver: local

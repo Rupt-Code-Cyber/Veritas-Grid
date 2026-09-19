@@ -1,0 +1,43 @@
+{
+  "categories": [
+    {
+      "name": "Excessive Use of Force",
+      "severity": "CRITICAL",
+      "target_routing_agency": "National Human Rights Commission (NHRC)",
+      "lookaround_match_patterns": ["brutality", "beaten", "tear gas"]
+    },
+    {
+      "name": "Financial Fraud & Corruption",
+      "severity": "HIGH",
+      "target_routing_agency": "Independent Corrupt Practices Commission (ICPC)",
+      "lookaround_match_patterns": ["invoice padding", "kickback", "extortion", "embezzle"]
+    },
+    {
+      "name": "Environmental & Land Violations",
+      "severity": "MEDIUM",
+      "target_routing_agency": "NESREA Environmental Monitoring",
+      "lookaround_match_patterns": ["oil spill", "illegal dumping", "pollution", "gas flaring"]
+    },
+    {
+      "name": "Financial Graft & Money Laundering",
+      "severity": "HIGH",
+      "target_routing_agency": "Economic and Financial Crimes Commission (EFCC)",
+      "lookaround_match_patterns": ["bribe", "laundering", "public funds", "wire fraud", "financial crime"]
+    },
+    {
+      "name": "National Security & Internal Threats",
+      "severity": "CRITICAL",
+      "target_routing_agency": "Department of State Services (DSS)",
+      "lookaround_match_patterns": ["subversion", "sabotage", "espionage", "state threat", "terrorism"]
+    },
+    {
+      "name": "Public Misconduct & Police Abuse",
+      "severity": "HIGH",
+      "target_routing_agency": "Nigeria Police Force (NPF)",
+      "lookaround_match_patterns": ["police extortion", "illegal detention", "police bribe", "checkpoint", "officer opened fire", "shot"]
+    }
+  ],
+  "baseline_default_category": "General Corporate Abuse",
+  "baseline_default_severity": "LOW",
+  "baseline_default_routing_target": "Ministry of Labour Exploitation Unit"
+}
